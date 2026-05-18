@@ -48,7 +48,7 @@ export default function Hero() {
             </h1>
             <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
               <p className="hero-body" style={{ color: "#d1d5db" }}>
-                Full Stack Developer
+                Full-Stack Software Engineer & Workflow Architect
               </p>
               <p className="hero-body" style={{ color: "#d1d5db" }}>
                 Personal and Small Business Website Creator
