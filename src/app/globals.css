@@ -132,6 +132,7 @@ body {
 /* ── Hero responsive ── */
 .hero-outer {
   padding: 0 16px;
+  margin-top: 56px;
 }
 
 .hero-card {
@@ -160,6 +161,7 @@ body {
 @media (min-width: 768px) {
   .hero-outer {
     padding: 0 32px;
+    margin-top: 0;
   }
 
   .hero-card {
