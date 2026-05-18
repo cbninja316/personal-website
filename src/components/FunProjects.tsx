@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 
 type FunProject = {
   id: number;
@@ -15,22 +15,22 @@ const funProjects: FunProject[] = [
     id: 1,
     title: "Home Lab Network Rack",
     description:
-      "Built a fully custom home lab with a 24U rack, including managed switches, patch panels, a pfSense router, and multiple VLANs for network segmentation. Hosts local servers for self-hosted services.",
-    image: "https://picsum.photos/400/300?random=30",
+      "Built a fully custom home lab with Unifi network equipment, a mini-pc running Proxmox for virtualization, and a custom-built NAS for storage.",
+    image: "/network.png",
   },
   {
     id: 2,
-    title: "Self-Hosted Media Server",
+    title: "Bench-Styled Planter",
     description:
-      "Deployed a full self-hosted media stack using Plex, Sonarr, Radarr, and Prowlarr running on a home server with 20TB of storage and hardware transcoding support.",
-    image: "https://picsum.photos/400/300?random=31",
+      "Created a custom-built planter from scratch using a bench-style design.",
+    image: "/bench.png",
   },
   {
     id: 3,
-    title: "Smart Home Automation",
+    title: "Outdoor Shed",
     description:
-      "Integrated Home Assistant with Z-Wave, Zigbee, and Matter devices throughout the home. Built custom automations for lighting, climate, and security using Node-RED pipelines.",
-    image: "https://picsum.photos/400/300?random=32",
+      "Renovated an old outdoor shed with replaced siding, sanded and new paint, and built a replacement ramp.",
+    image: "/shed.png",
   },
 ];
 
@@ -75,10 +75,7 @@ export default function FunProjects() {
   };
 
   return (
-    <section
-      className="py-24 px-4"
-      style={{ backgroundColor: "#0b1426" }}
-    >
+    <section className="py-24 px-4" style={{ backgroundColor: "#0b1426" }}>
       <h2 className="text-4xl font-bold text-white text-center mb-16">
         Fun Projects
       </h2>
