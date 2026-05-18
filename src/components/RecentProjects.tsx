@@ -93,7 +93,7 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function RecentProjects() {
   return (
-    <section style={{ backgroundColor: "#0b1426", padding: "64px 0" }}>
+    <section style={{ backgroundColor: "#0b1426", padding: "32px 0 64px" }}>
       <h2
         style={{
           textAlign: "center",
