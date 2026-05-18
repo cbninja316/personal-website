@@ -12,7 +12,7 @@ export default function Hero() {
       <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10">
         <Image
           src="/ltd-logo.png"
-          alt="LTD Logo"
+          alt="Logan Thomas Demaray Logo"
           width={80}
           height={40}
           className="object-contain"
@@ -69,7 +69,7 @@ export default function Hero() {
           >
             <Image
               src="/logan.png"
-              alt="Profile photo"
+              alt="Logan Demaray Profile photo"
               fill
               className="object-cover"
               priority

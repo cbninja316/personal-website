@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     "Full Stack Developer specializing in personal and small business websites, home projects, and network infrastructure.",
   icons: {
-    icon: "/ltd-logo.png",
+    icon: "/ltd-favicon.png",
   },
 };
 
