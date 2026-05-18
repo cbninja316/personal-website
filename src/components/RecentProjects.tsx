@@ -46,6 +46,7 @@ const projects: Project[] = [
 function ProjectCard({ project }: { project: Project }) {
   return (
     <div
+      className="project-card"
       style={{
         display: "flex",
         borderRadius: 20,
@@ -53,17 +54,10 @@ function ProjectCard({ project }: { project: Project }) {
         backgroundColor: "white",
         boxShadow:
           "0 0 0 1px rgba(139,92,246,0.45), 0 0 28px rgba(139,92,246,0.2), 0 8px 32px rgba(0,0,0,0.5)",
-        minHeight: 240,
+        minHeight: 0,
       }}
     >
-      <div
-        style={{
-          width: "42%",
-          flexShrink: 0,
-          alignSelf: "stretch",
-          padding: 16,
-        }}
-      >
+      <div className="project-image-wrapper">
         <div
           style={{
             position: "relative",
@@ -82,48 +76,13 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "28px 36px",
-        }}
-      >
+      <div className="project-content">
         <div>
-          <h3
-            style={{
-              fontWeight: 700,
-              color: "#111827",
-              fontSize: 26,
-              marginBottom: 14,
-              lineHeight: 1.2,
-            }}
-          >
-            {project.title}
-          </h3>
-          <p style={{ color: "#4b5563", fontSize: 15, lineHeight: 1.65 }}>
-            {project.description}
-          </p>
+          <h3 className="project-title">{project.title}</h3>
+          <p className="project-description">{project.description}</p>
         </div>
-
-        <div style={{ marginTop: 24 }}>
-          <a
-            href={project.link}
-            style={{
-              display: "inline-block",
-              padding: "10px 32px",
-              borderRadius: 9999,
-              border: "1.5px solid rgba(0,0,0,0.18)",
-              fontSize: 15,
-              fontWeight: 500,
-              color: "#374151",
-              textDecoration: "none",
-              transition: "background-color 0.2s",
-              boxShadow: "0 4px 14px rgba(0,0,0,0.12)",
-            }}
-          >
+        <div className="project-button-wrap">
+          <a href={project.link} className="project-button">
             {project.linkText}
           </a>
         </div>
@@ -134,14 +93,14 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function RecentProjects() {
   return (
-    <section style={{ backgroundColor: "#0b1426", padding: "96px 0" }}>
+    <section style={{ backgroundColor: "#0b1426", padding: "64px 0" }}>
       <h2
         style={{
           textAlign: "center",
           color: "white",
           fontSize: 36,
           fontWeight: 700,
-          marginBottom: 64,
+          marginBottom: 48,
         }}
       >
         Recent Projects
@@ -151,10 +110,10 @@ export default function RecentProjects() {
         style={{
           maxWidth: 960,
           margin: "0 auto",
-          padding: "0 40px",
+          padding: "0 16px",
           display: "flex",
           flexDirection: "column",
-          gap: 28,
+          gap: 24,
         }}
       >
         {projects.map((project) => (

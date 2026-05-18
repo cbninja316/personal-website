@@ -51,17 +51,24 @@ const rightEntries: TimelineEntry[] = [
   },
 ];
 
+const mobileEntries: TimelineEntry[] = [
+  leftEntries[0],
+  rightEntries[0],
+  leftEntries[1],
+  rightEntries[1],
+];
+
 const cardShadow =
   "0 0 0 1px rgba(139,92,246,0.45), 0 0 28px rgba(139,92,246,0.2), 0 8px 32px rgba(0,0,0,0.5)";
 
 const connectorColor = "rgba(148,163,184,0.45)";
 
-function Logo({ src, alt }: { src: string; alt: string }) {
+function Logo({ src, alt, size = 88 }: { src: string; alt: string; size?: number }) {
   return (
     <div
       style={{
-        width: 88,
-        height: 88,
+        width: size,
+        height: size,
         borderRadius: "50%",
         overflow: "hidden",
         position: "relative",
@@ -85,24 +92,10 @@ function EntryCard({ entry }: { entry: TimelineEntry }) {
         boxShadow: cardShadow,
       }}
     >
-      <h3
-        style={{
-          fontWeight: 700,
-          color: "#111827",
-          fontSize: 16,
-          marginBottom: 4,
-        }}
-      >
+      <h3 style={{ fontWeight: 700, color: "#111827", fontSize: 16, marginBottom: 4 }}>
         {entry.title}
       </h3>
-      <p
-        style={{
-          color: "#7c3aed",
-          fontSize: 12,
-          fontWeight: 600,
-          marginBottom: 10,
-        }}
-      >
+      <p style={{ color: "#7c3aed", fontSize: 12, fontWeight: 600, marginBottom: 10 }}>
         {entry.subtitle}
       </p>
       <p style={{ color: "#4b5563", fontSize: 13, lineHeight: 1.65 }}>
@@ -125,20 +118,12 @@ function LeftEntry({ entry }: { entry: TimelineEntry }) {
             paddingBottom: 6,
           }}
         >
-          <p
-            style={{
-              color: "white",
-              fontWeight: 700,
-              fontSize: 14,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
-          >
+          <p style={{ color: "white", fontWeight: 700, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase" }}>
             {entry.dates}
           </p>
         </div>
       </div>
-      <div style={{ paddingLeft: 0, paddingRight: 40 }}>
+      <div style={{ paddingRight: 40 }}>
         <EntryCard entry={entry} />
       </div>
     </div>
@@ -158,21 +143,38 @@ function RightEntry({ entry }: { entry: TimelineEntry }) {
             textAlign: "right",
           }}
         >
-          <p
-            style={{
-              color: "white",
-              fontWeight: 700,
-              fontSize: 14,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
-          >
+          <p style={{ color: "white", fontWeight: 700, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase" }}>
             {entry.dates}
           </p>
         </div>
         <Logo src={entry.logo} alt={entry.logoAlt} />
       </div>
-      <div style={{ paddingLeft: 40, paddingRight: 0 }}>
+      <div style={{ paddingLeft: 40 }}>
+        <EntryCard entry={entry} />
+      </div>
+    </div>
+  );
+}
+
+function MobileEntry({ entry }: { entry: TimelineEntry }) {
+  return (
+    <div style={{ marginBottom: 48 }}>
+      <div style={{ display: "flex", alignItems: "center", marginBottom: 14 }}>
+        <Logo src={entry.logo} alt={entry.logoAlt} size={72} />
+        <div
+          style={{
+            flex: 1,
+            marginLeft: 14,
+            borderBottom: `2px solid ${connectorColor}`,
+            paddingBottom: 6,
+          }}
+        >
+          <p style={{ color: "white", fontWeight: 700, fontSize: 13, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            {entry.dates}
+          </p>
+        </div>
+      </div>
+      <div style={{ paddingRight: 16 }}>
         <EntryCard entry={entry} />
       </div>
     </div>
@@ -181,21 +183,41 @@ function RightEntry({ entry }: { entry: TimelineEntry }) {
 
 export default function Timeline() {
   return (
-    <section style={{ backgroundColor: "#0b1426", padding: "96px 0" }}>
+    <section style={{ backgroundColor: "#0b1426", padding: "64px 0" }}>
       <h2
         style={{
           textAlign: "center",
           color: "white",
           fontSize: 36,
           fontWeight: 700,
-          marginBottom: 72,
+          marginBottom: 48,
         }}
       >
         My Timeline
       </h2>
 
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 40px" }}>
-        <div style={{ position: "relative" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 16px" }}>
+
+        {/* ── Mobile: single column, interleaved order ── */}
+        <div className="timeline-mobile-only" style={{ position: "relative" }}>
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              bottom: 0,
+              width: 4,
+              backgroundColor: connectorColor,
+              borderRadius: 2,
+            }}
+          />
+          {mobileEntries.map((entry, i) => (
+            <MobileEntry key={i} entry={entry} />
+          ))}
+        </div>
+
+        {/* ── Desktop: two-column staggered layout ── */}
+        <div className="timeline-desktop-only" style={{ position: "relative" }}>
           <div
             style={{
               position: "absolute",
@@ -204,32 +226,24 @@ export default function Timeline() {
               bottom: 0,
               width: 4,
               transform: "translateX(-50%)",
-              backgroundColor: "rgba(148,163,184,0.45)",
+              backgroundColor: connectorColor,
               borderRadius: 2,
             }}
           />
-
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
               {leftEntries.map((entry, i) => (
                 <LeftEntry key={i} entry={entry} />
               ))}
             </div>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 64,
-                paddingTop: 144,
-              }}
-            >
+            <div style={{ display: "flex", flexDirection: "column", gap: 64, paddingTop: 144 }}>
               {rightEntries.map((entry, i) => (
                 <RightEntry key={i} entry={entry} />
               ))}
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
