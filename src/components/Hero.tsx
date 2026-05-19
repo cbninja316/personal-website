@@ -4,7 +4,7 @@ import NetworkBackground from "./NetworkBackground";
 export default function Hero() {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ backgroundColor: "#0b1426" }}
     >
       <NetworkBackground />

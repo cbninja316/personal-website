@@ -21,6 +21,17 @@ body {
   scroll-behavior: smooth;
 }
 
+/* ── Fun Projects responsive ── */
+.fun-projects-section {
+  padding: 64px 16px 80px;
+}
+
+@media (min-width: 640px) {
+  .fun-projects-section {
+    padding: 96px 16px;
+  }
+}
+
 /* ── Timeline responsive ── */
 .timeline-mobile-only {
   display: block;
@@ -130,9 +141,12 @@ body {
 }
 
 /* ── Hero responsive ── */
+.hero-section {
+  padding-top: 88px;
+}
+
 .hero-outer {
   padding: 0 16px;
-  margin-top: 56px;
 }
 
 .hero-card {
@@ -158,16 +172,42 @@ body {
   margin: 0 auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .hero-outer {
-    padding: 0 32px;
-    margin-top: 0;
+    padding: 0 24px;
   }
 
   .hero-card {
-    padding: 48px 56px;
+    padding: 36px 40px;
     flex-direction: row;
     align-items: center;
+  }
+
+  .hero-heading {
+    font-size: 3rem;
+  }
+
+  .hero-body {
+    font-size: 1rem;
+  }
+
+  .hero-photo {
+    width: 220px;
+    height: 260px;
+    max-width: none;
+    flex-shrink: 0;
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-outer {
+    padding: 0 32px;
+  }
+
+
+  .hero-card {
+    padding: 48px 56px;
   }
 
   .hero-heading {
@@ -181,7 +221,5 @@ body {
   .hero-photo {
     width: 340px;
     height: 380px;
-    flex-shrink: 0;
-    margin: 0;
   }
 }

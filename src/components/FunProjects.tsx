@@ -93,7 +93,7 @@ export default function FunProjects() {
   };
 
   return (
-    <section className="py-24 px-4" style={{ backgroundColor: "#0b1426" }}>
+    <section className="fun-projects-section" style={{ backgroundColor: "#0b1426" }}>
       <h2 className="text-4xl font-bold text-white text-center mb-16">
         Fun Projects
       </h2>
