@@ -36,6 +36,7 @@ const funProjects: FunProject[] = [
 
 export default function FunProjects() {
   const [active, setActive] = useState(0);
+  const touchStartX = useState<number | null>(null);
 
   const advance = useCallback(() => {
     setActive((prev) => (prev + 1) % funProjects.length);
@@ -45,6 +46,23 @@ export default function FunProjects() {
     const id = setInterval(advance, 5000);
     return () => clearInterval(id);
   }, [advance]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX[1](e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX[0] === null) return;
+    const diff = touchStartX[0] - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        setActive((prev) => (prev + 1) % funProjects.length);
+      } else {
+        setActive((prev) => (prev - 1 + funProjects.length) % funProjects.length);
+      }
+    }
+    touchStartX[1](null);
+  };
 
   const getPosition = (index: number): "center" | "right" | "left" => {
     const diff = (index - active + funProjects.length) % funProjects.length;
@@ -80,7 +98,11 @@ export default function FunProjects() {
         Fun Projects
       </h2>
 
-      <div className="relative flex items-center justify-center overflow-hidden h-[520px]">
+      <div
+        className="relative flex items-center justify-center overflow-hidden h-[520px]"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         {funProjects.map((project, index) => {
           const pos = getPosition(index);
           return (
