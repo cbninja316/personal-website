@@ -140,6 +140,35 @@ body {
   }
 }
 
+/* ── Hero social icons ── */
+.hero-social-link {
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.hero-social-link:hover {
+  opacity: 1;
+}
+
+.hero-icons-desktop {
+  display: none !important;
+}
+
+.hero-icons-mobile {
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .hero-icons-desktop {
+    display: flex !important;
+  }
+
+  .hero-icons-mobile {
+    display: none !important;
+  }
+}
+
 /* ── Hero responsive ── */
 .hero-section {
   padding-top: 88px;
