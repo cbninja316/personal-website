@@ -50,7 +50,7 @@ export default function FunProjects() {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       setActive((prev) => (prev + 1) % funProjects.length);
-    }, 5000);
+    }, 8000);
   }, []);
 
   useEffect(() => {
