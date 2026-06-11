@@ -13,20 +13,27 @@ type FunProject = {
 const funProjects: FunProject[] = [
   {
     id: 1,
+    title: "One Accord Project",
+    description:
+      "Created a custom-built website for a local church. See recent projects for more info.",
+    image: "/one-accord-project.png",
+  },
+  {
+    id: 2,
     title: "Home Lab Network Rack",
     description:
       "Built a fully custom home lab with Unifi network equipment, a mini-pc running Proxmox for virtualization, and a custom-built NAS for storage.",
     image: "/network.png",
   },
   {
-    id: 2,
+    id: 3,
     title: "Bench-Styled Planter",
     description:
       "Created a custom-built planter from scratch using a bench-style design.",
     image: "/bench.png",
   },
   {
-    id: 3,
+    id: 4,
     title: "Outdoor Shed",
     description:
       "Renovated an old outdoor shed with replaced siding, sanded and new paint, and built a replacement ramp.",
@@ -58,7 +65,9 @@ export default function FunProjects() {
       if (diff > 0) {
         setActive((prev) => (prev + 1) % funProjects.length);
       } else {
-        setActive((prev) => (prev - 1 + funProjects.length) % funProjects.length);
+        setActive(
+          (prev) => (prev - 1 + funProjects.length) % funProjects.length,
+        );
       }
     }
     touchStartX[1](null);
@@ -93,7 +102,10 @@ export default function FunProjects() {
   };
 
   return (
-    <section className="fun-projects-section" style={{ backgroundColor: "#0b1426" }}>
+    <section
+      className="fun-projects-section"
+      style={{ backgroundColor: "#0b1426" }}
+    >
       <h2 className="text-4xl font-bold text-white text-center mb-16">
         Fun Projects
       </h2>
