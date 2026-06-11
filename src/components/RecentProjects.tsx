@@ -10,6 +10,14 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "One Accord",
+    description:
+      "A fully custom and local website for Southmoore Baptist Church. The site is built with Next.js, Typescript, and C# and deployed with Vercel. Features include a kanban board for church tasks, receipt manager, event photo manager, and a volunteer scheduler.",
+    image: "/one-accord.png",
+    link: "https://www.youtube.com/watch?v=xt25N3BOHss",
+    linkText: "View Video",
+  },
+  {
     title: "Fix It OKC",
     description:
       "Created a website design and final product from scratch using WordPress and overcoming limitations with custom code. Created a full scheduling back end that would handle scheduling, time off, and employee schedules.",
