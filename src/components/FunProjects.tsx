@@ -16,7 +16,7 @@ const funProjects: FunProject[] = [
     title: "One Accord Project",
     description:
       "Created a custom-built website for a local church. See recent projects for more info.",
-    image: "/one-accord-project.png",
+    image: "/one-accord-logo.png",
   },
   {
     id: 2,
