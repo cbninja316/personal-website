@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type FunProject = {
   id: number;
@@ -43,45 +43,67 @@ const funProjects: FunProject[] = [
 
 export default function FunProjects() {
   const [active, setActive] = useState(0);
-  const touchStartX = useState<number | null>(null);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const advance = useCallback(() => {
-    setActive((prev) => (prev + 1) % funProjects.length);
+  const startTimer = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setActive((prev) => (prev + 1) % funProjects.length);
+    }, 5000);
   }, []);
 
   useEffect(() => {
-    const id = setInterval(advance, 5000);
-    return () => clearInterval(id);
-  }, [advance]);
+    startTimer();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [startTimer]);
+
+  const goTo = useCallback(
+    (index: number) => {
+      setActive(index);
+      startTimer();
+    },
+    [startTimer],
+  );
+
+  const advance = useCallback(() => {
+    setActive((prev) => (prev + 1) % funProjects.length);
+    startTimer();
+  }, [startTimer]);
+
+  const retreat = useCallback(() => {
+    setActive((prev) => (prev - 1 + funProjects.length) % funProjects.length);
+    startTimer();
+  }, [startTimer]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX[1](e.touches[0].clientX);
+    setTouchStartX(e.touches[0].clientX);
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX[0] === null) return;
-    const diff = touchStartX[0] - e.changedTouches[0].clientX;
+    if (touchStartX === null) return;
+    const diff = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        setActive((prev) => (prev + 1) % funProjects.length);
-      } else {
-        setActive(
-          (prev) => (prev - 1 + funProjects.length) % funProjects.length,
-        );
-      }
+      if (diff > 0) advance();
+      else retreat();
     }
-    touchStartX[1](null);
+    setTouchStartX(null);
   };
 
-  const getPosition = (index: number): "center" | "right" | "left" => {
+  const getPosition = (
+    index: number,
+  ): "center" | "right" | "left" | "hidden" => {
     const diff = (index - active + funProjects.length) % funProjects.length;
     if (diff === 0) return "center";
     if (diff === 1) return "right";
-    return "left";
+    if (diff === funProjects.length - 1) return "left";
+    return "hidden";
   };
 
   const positionStyles: Record<
-    "center" | "right" | "left",
+    "center" | "right" | "left" | "hidden",
     React.CSSProperties
   > = {
     center: {
@@ -98,6 +120,12 @@ export default function FunProjects() {
       transform: "translateX(-68%) scale(0.87)",
       zIndex: 10,
       opacity: 0.7,
+    },
+    hidden: {
+      transform: "translateX(0) scale(0.75)",
+      zIndex: 0,
+      opacity: 0,
+      pointerEvents: "none",
     },
   };
 
@@ -120,7 +148,7 @@ export default function FunProjects() {
           return (
             <div
               key={project.id}
-              onClick={() => setActive(index)}
+              onClick={() => goTo(index)}
               className="absolute cursor-pointer"
               style={{
                 ...positionStyles[pos],
@@ -176,7 +204,7 @@ export default function FunProjects() {
         {funProjects.map((_, index) => (
           <button
             key={index}
-            onClick={() => setActive(index)}
+            onClick={() => goTo(index)}
             aria-label={`Go to project ${index + 1}`}
             className="w-3 h-3 rounded-full transition-colors duration-300"
             style={{
