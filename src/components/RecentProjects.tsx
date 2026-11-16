@@ -4,18 +4,15 @@ type Project = {
   title: string;
   description: string;
   image: string;
-  link: string;
-  linkText: string;
+  link?: string;
+  linkText?: string;
 };
 
 const projects: Project[] = [
   {
-    title: "One Accord",
-    description:
-      "A fully custom and local website for Southmoore Baptist Church. The site is built with Next.js, Typescript, and C# and deployed with Vercel. Features include a kanban board for church tasks, receipt manager, event photo manager, and a volunteer scheduler.",
+    title: "Aquila",
+    description: "More information coming soon.",
     image: "/one-accord.png",
-    link: "https://www.youtube.com/watch?v=xt25N3BOHss",
-    linkText: "View Video",
   },
   {
     title: "Fix It OKC",
@@ -89,11 +86,13 @@ function ProjectCard({ project }: { project: Project }) {
           <h3 className="project-title">{project.title}</h3>
           <p className="project-description">{project.description}</p>
         </div>
-        <div className="project-button-wrap">
-          <a href={project.link} className="project-button">
-            {project.linkText}
-          </a>
-        </div>
+        {project.link && project.linkText && (
+          <div className="project-button-wrap">
+            <a href={project.link} className="project-button">
+              {project.linkText}
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

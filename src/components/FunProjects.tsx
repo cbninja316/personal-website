@@ -13,7 +13,7 @@ type FunProject = {
 const funProjects: FunProject[] = [
   {
     id: 1,
-    title: "One Accord Project",
+    title: "Aquila Project",
     description:
       "Created a custom-built website for a local church. See recent projects for more info.",
     image: "/one-accord-logo.png",
